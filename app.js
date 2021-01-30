@@ -49,7 +49,7 @@ app.get("/:endpoint/stats", async (req, res) => {
   const urlDetails = await URLs.findOne({ endpoint: req.params.endpoint });
 
   // Check for endpoint existence
-  if (urlDetails == null) {
+  if (urlDetails === null) {
     return res.sendStatus(404);
   }
 
@@ -62,7 +62,9 @@ app.post("/createUrl", async (req, res) => {
 
   // Validation for full URL
   if (!validUrl.isUri(fullUrl)) {
-    return res.status(401).json("[ERROR] Invalid url");
+    return res
+      .status(401)
+      .send("<p>An error ocurred because the provided URL is invalid</p>");
   }
 
   // Endpoint vaidation
@@ -71,7 +73,16 @@ app.post("/createUrl", async (req, res) => {
       ? nanoid(6)
       : req.body.customEndpoint;
 
-  // New doc model
+  const duplicatesChecking = await URLs.findOne({ endpoint });
+  if (duplicatesChecking) {
+    return res
+      .status(401)
+      .send(
+        "<p>An error ocurred because the provided endpoint already exists</p>"
+      );
+  }
+
+  // Create new doc model
   const doc = {
     fullUrl,
     endpoint,
