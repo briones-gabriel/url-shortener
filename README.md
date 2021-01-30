@@ -2,7 +2,6 @@
 
 A URL shortening service so that users can make custom URLs to their long URLs.
 
----
 ## Requirements
 
 To run the project you will only need Node.js or Yarn installed in your environement.
@@ -27,8 +26,6 @@ Also, be sure to have `git` available in your PATH, `npm` might need it (You can
   After installing node, this project will need yarn too, so just run the following command.
 
       $ npm install -g yarn
-
----
 
 ## Install
 
