@@ -10,8 +10,9 @@ const options = {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
+// Add your own MongoDB Atlas credentials for the app to work
 mongoose.connect(
-  "mongodb+srv://url-shortener-user:oM3BTVpbXy3CqeF0@url-shortener.tnyr3.mongodb.net/url-shortener?retryWrites=true&w=majority",
+  "mongodb+srv://<username>:<password>@<dbname>.tnyr3.mongodb.net/<db-name>?retryWrites=true&w=majority",
   options
 );
 

@@ -4,7 +4,7 @@ A URL shortening service so that users can make custom URLs to their long URLs.
 
 ## Requirements
 
-To run the project you will only need Node.js or Yarn installed in your environement.
+To run the project you will only need Node.js or Yarn installed in your environement, and a MongoDB Atlas account where to store the data.
 
 ### Node installation
 - #### Node installation on Windows
@@ -27,6 +27,13 @@ Also, be sure to have `git` available in your PATH, `npm` might need it (You can
 
       $ npm install -g yarn
 
+### MongoDB configuration
+  Finally, you will need to configure the MongoDB Atlas connection.
+
+      $ cd url-shortener/app.js
+      $ Go to line 15
+      $ Edit the MongoDB Atlas credentials with your <username>, <password> and <dbname> 
+      
 ## Install
 
     $ git clone https://github.com/briones-gabriel/url-shortener
