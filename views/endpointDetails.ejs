@@ -1,0 +1,73 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>URL Details</title>
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper blue">
+        <div class="container">
+          <a class="brand-logo center">URL Details</a>
+          <ul>
+            <li>
+              <a href="/"><i class="material-icons">home</i></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+      <br />
+      <!-- Full URL -->
+      <ul class="collection">
+        <b>
+          <a
+            class="collection-item center-align blue-text"
+            href="<%= urlDetails.fullUrl %>"
+          >
+            <%= urlDetails.fullUrl %>
+          </a>
+        </b>
+      </ul>
+
+      <!-- Table to display URL Details -->
+      <table class="centered">
+        <thead>
+          <tr>
+            <th>Short URL</th>
+            <th>Clicks</th>
+            <th>Date created</th>
+            <th>Last accesed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <a href="/<%= urlDetails.endpoint %>">
+                <%= urlDetails.endpoint %>
+              </a>
+            </td>
+            <td><%= urlDetails.clicks %></td>
+            <td><%= urlDetails.date %></td>
+            <td><%= urlDetails.lastAccesed %></td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+    </div>
+  </body>
+</html>

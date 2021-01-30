@@ -1,0 +1,99 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <title>URL Shortener</title>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper blue">
+        <a class="brand-logo center">URL Shortener</a>
+      </div>
+    </nav>
+    <div class="container center-align">
+      <form action="/createUrl" method="POST">
+        <!-- Full URL input field -->
+        <div class="input-field">
+          <input type="url" name="fullUrl" id="fullUrl" required />
+          <label for="fullUrl">Url</label>
+        </div>
+        <!-- Custom URL input field -->
+        <div class="input-field">
+          <input type="text" name="customEndpoint" id:"customEndpoint"
+          minlength="4">
+          <label for="customEndpoint">Custom endpoint</label>
+        </div>
+        <button type="submit" class="btn blue">Shorten url</button>
+      </form>
+
+      <br />
+
+      <!-- Table to display information (dynamically rendered) -->
+      <% if (listOfUrls[0]) { %>
+      <table class="highlight">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Full URL</th>
+            <th>Short URL</th>
+            <th></th>
+          </tr>
+        </thead>
+        <!-- Table body in which to show each one of the shortened URLs -->
+        <tbody>
+          <% listOfUrls.forEach(url => { %>
+          <tr>
+            <!-- URL Details -->
+            <td>
+              <a href="<%= url.endpoint %>/stats">
+                <i class="material-icons">info_outline</i>
+              </a>
+            </td>
+            <!-- Full URL -->
+            <td>
+              <a href="<%= url.fullUrl %>"><%= url.fullUrl %></a>
+            </td>
+            <!-- Endpoint -->
+            <td>
+              <a href="<%= url.endpoint %>"><%= url.endpoint %></a>
+            </td>
+            <!-- Remove URL -->
+            <td>
+              <a href="" onclick="removeUrl('<%= url.endpoint %>')">
+                <i class="material-icons red-text">delete_outline</i>
+              </a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <% } %>
+    </div>
+    <script>
+      // DELETE request
+      function removeUrl(data) {
+        const endpoint = `/${data}`;
+
+        fetch(endpoint, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          // Homepage redirection
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => console.log(err));
+      }
+    </script>
+  </body>
+</html>
